@@ -1,6 +1,7 @@
 "use client";
 import { useMessage } from "@/lib/store/messages";
 import Messages from "./Messages";
+import DeleteAction from "./DeleteAction";
 
 const ListsMessages = () => {
    const messages = useMessage((state) => state.messages);
@@ -9,9 +10,10 @@ const ListsMessages = () => {
          <div className="flex-1"></div>
          <div className="space-y-7">
             {messages.map((item, index) => (
-               <Messages item={item} key={index} />
+               <Messages message={item} key={index} />
             ))}
          </div>
+         <DeleteAction />
       </div>
    );
 };

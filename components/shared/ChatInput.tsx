@@ -9,6 +9,7 @@ import { Input } from "../ui/input";
 export default function ChatInput() {
    const user = useUser((state) => state.user);
    const addMessage = useMessage((state) => state.addMessage);
+   const optimizeMessage = useMessage((state) => state.optimizeMessage);
    const supabase = supabaseBrowser();
    const handleSendMessage = async (text: string) => {
       if (text.trim()) {

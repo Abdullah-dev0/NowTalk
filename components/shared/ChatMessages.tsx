@@ -1,7 +1,7 @@
-import React, { Suspense } from "react";
-import ListsMessages from "./ListsMessages";
-import supabaseServer from "@/lib/supabase/server";
 import { InitMessages } from "@/lib/store/InitMessages";
+import supabaseServer from "@/lib/supabase/server";
+import { Suspense } from "react";
+import ListsMessages from "./ListsMessages";
 
 const ChatMessages = async () => {
    const supabase = await supabaseServer();
