@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/shared/theme-provider";
 import "./globals.css";
+import { ToggleButton } from "@/components/shared/ToggleButton";
 
 const space_Grotesk = Space_Grotesk({ subsets: ["latin"] });
 
@@ -24,6 +25,9 @@ export default function RootLayout({
                enableSystem
                disableTransitionOnChange
             >
+               <main className="absolute bottom-7 p-2 right-5">
+                  <ToggleButton />
+               </main>
                {children}
             </ThemeProvider>
          </body>
