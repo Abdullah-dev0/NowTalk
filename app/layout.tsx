@@ -1,22 +1,32 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const space_Grotesk = Space_Grotesk({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "NowTalk",
-  description: "A  chat app for the modern web",
+   title: "NowTalk",
+   description: "A  chat app for the modern web",
 };
 
 export default function RootLayout({
-  children,
+   children,
 }: Readonly<{
-  children: React.ReactNode;
+   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
-  );
+   return (
+      <html lang="en">
+         <body className={space_Grotesk.className}>
+            <ThemeProvider
+               attribute="class"
+               defaultTheme="dark"
+               enableSystem
+               disableTransitionOnChange
+            >
+               {children}
+            </ThemeProvider>
+         </body>
+      </html>
+   );
 }
