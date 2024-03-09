@@ -3,6 +3,7 @@ import { Space_Grotesk } from "next/font/google";
 import { ThemeProvider } from "@/components/shared/theme-provider";
 import "./globals.css";
 import { ToggleButton } from "@/components/shared/ToggleButton";
+import { Toaster } from "sonner";
 
 const space_Grotesk = Space_Grotesk({ subsets: ["latin"] });
 
@@ -25,10 +26,11 @@ export default function RootLayout({
                enableSystem
                disableTransitionOnChange
             >
-               <main className="absolute bottom-7 p-2 right-5">
+               {/* <main className="absolute bottom-7 p-2 right-5">
                   <ToggleButton />
-               </main>
+               </main> */}
                {children}
+               <Toaster position="top-center" />
             </ThemeProvider>
          </body>
       </html>
