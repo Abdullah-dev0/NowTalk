@@ -1,11 +1,14 @@
+"use client";
+import { useMessage } from "@/lib/store/messages";
 import Messages from "./Messages";
 
-const ListsMessages = ({ userdata }: any) => {
+const ListsMessages = () => {
+   const messages = useMessage((state) => state.messages);
    return (
       <div className="p-5 flex flex-col flex-1 h-full overflow-y-auto">
          <div className="flex-1"></div>
          <div className="space-y-7">
-            {userdata.map((item: any, index: number) => (
+            {messages.map((item, index) => (
                <Messages item={item} key={index} />
             ))}
          </div>
