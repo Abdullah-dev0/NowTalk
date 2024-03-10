@@ -1,9 +1,9 @@
 "use client";
-import React from "react";
-import { Button } from "../ui/button";
 import supabaseBrowser from "@/lib/supabase/Client";
 import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
+import React from "react";
+import { Button } from "../ui/button";
 import Spinner from "./Spinner";
 
 const ChatHeader = ({ user }: { user: User | undefined }) => {
@@ -19,10 +19,11 @@ const ChatHeader = ({ user }: { user: User | undefined }) => {
                redirectTo: location.origin + "/auth/callback",
             },
          });
+         setLoading(false);
       } catch (error) {
          console.log("error", error);
+         setLoading(false);
       }
-      setLoading(false);
    };
 
    const handleLogout = async () => {
@@ -31,10 +32,11 @@ const ChatHeader = ({ user }: { user: User | undefined }) => {
          const supabase = supabaseBrowser();
          await supabase.auth.signOut();
          Router.refresh();
+         setLoading(false);
       } catch (error) {
+         setLoading(false);
          console.log("error", error);
       }
-      setLoading(false);
    };
    return (
       <div className="h-20">
@@ -50,7 +52,7 @@ const ChatHeader = ({ user }: { user: User | undefined }) => {
                <Button
                   disabled={loading}
                   className={`${
-                     loading ? "cursor-not-allowed opacity-50" : null
+                     loading ? "cursor-not-allowed opacity-50" : ""
                   }`}
                   onClick={handleLogout}
                >
@@ -61,7 +63,7 @@ const ChatHeader = ({ user }: { user: User | undefined }) => {
                <Button
                   disabled={loading}
                   className={`${
-                     loading ? "cursor-not-allowed opacity-50" : null
+                     loading ? "cursor-not-allowed opacity-50" : ""
                   }`}
                   onClick={handleLoginWithGithub}
                >

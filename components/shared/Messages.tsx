@@ -29,13 +29,17 @@ const Messages = ({ message }: { message: any }) => {
                <div className="flex justify-between items-center">
                   <div className="flex gap-2 items-center">
                      <h1>{message.users.display_name}</h1>
-                     <h1 className="text-[13px] font-light">{new Date(message.created_at).toDateString()}</h1>
+                     <h1 className="text-[13px] font-light">
+                        {new Date(message.created_at).toDateString()}
+                     </h1>
                   </div>
                   {message.users?.id === user?.id && (
                      <ActionButtons message={message} />
                   )}
                </div>
-               <p className="text-sm text-slate-200">{message.text}</p>
+               <p className="text-sm dark:text-slate-200 text-slate-700">
+                  {message.text}
+               </p>
             </div>
          </div>
       </>

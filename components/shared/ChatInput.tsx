@@ -5,11 +5,12 @@ import supabaseBrowser from "@/lib/supabase/Client";
 import { toast } from "sonner";
 import { v4 as uuidv4 } from "uuid";
 import { Input } from "../ui/input";
+import { InitMessages } from "@/lib/store/InitMessages";
 
 export default function ChatInput() {
    const user = useUser((state) => state.user);
    const addMessage = useMessage((state) => state.addMessage);
-   const optimizeMessage = useMessage((state) => state.optimizeMessage);
+   const removeMessage = useMessage((state) => state.removeMessage);
    const supabase = supabaseBrowser();
    const handleSendMessage = async (text: string) => {
       if (text.trim()) {
@@ -27,11 +28,13 @@ export default function ChatInput() {
                display_name: user?.user_metadata.user_name,
             },
          };
-         addMessage(newMessage as unknown as Imessage);
+         addMessage(newMessage as Imessage | any);
 
          const { error } = await supabase.from("messages").insert({ text, id });
          if (error) {
             toast.error(error.message);
+            removeMessage(newMessage.id);
+            return;
          }
       } else {
          toast.error("Message can not be empty!!");

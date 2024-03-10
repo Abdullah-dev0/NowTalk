@@ -26,9 +26,9 @@ export default function RootLayout({
                enableSystem
                disableTransitionOnChange
             >
-               {/* <main className="absolute bottom-7 p-2 right-5">
+               <main className="absolute top-7 md:block hidden p-2 right-5">
                   <ToggleButton />
-               </main> */}
+               </main>
                {children}
                <Toaster position="top-center" />
             </ThemeProvider>
