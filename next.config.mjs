@@ -1,4 +1,3 @@
-import { hostname } from 'os';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -7,7 +6,7 @@ const nextConfig = {
       {
         hostname: "avatars.githubusercontent.com",
         protocol: "https",
-      }
+      },
     ]
   }
 };

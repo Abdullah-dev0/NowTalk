@@ -17,16 +17,22 @@ export type Imessage = {
 
 interface MessageState {
    messages: Imessage[];
+   optimizeIds: string[];
+   setOptimizeIds: (ids: string) => void;
    addMessage: (message: Imessage) => void;
    actionMessage: Imessage | undefined;
    setActionMessage: (message: Imessage) => void;
    optimizeMessage: (messageId: string) => void;
    removeMessage: (id: string) => void;
+   editMessage: (message: Imessage) => void;
 }
 
 export const useMessage = create<MessageState>()((set) => ({
    messages: [],
+   optimizeIds: [],
    actionMessage: undefined,
+   setOptimizeIds: (ids) =>
+      set((state) => ({ optimizeIds: [...state.optimizeIds, ids] })),
    addMessage: (message) =>
       set((state) => ({ messages: [...state.messages, message] })),
 
@@ -38,5 +44,15 @@ export const useMessage = create<MessageState>()((set) => ({
    removeMessage: (id) =>
       set((state) => ({
          messages: state.messages.filter((message) => message.id !== id),
+      })),
+   editMessage: (message) =>
+      set((state) => ({
+         messages: state.messages.filter((item) => {
+            if (item.id === message.id) {
+               item.text = message.text;
+               item.is_edit = message.is_edit;
+            }
+            return item;
+         }),
       })),
 }));

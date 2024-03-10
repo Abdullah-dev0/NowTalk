@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import { Button } from "../ui/button";
 import Spinner from "./Spinner";
+import { ToggleButton } from "./ToggleButton";
 
 const ChatHeader = ({ user }: { user: User | undefined }) => {
    const [loading, setLoading] = React.useState(false);
@@ -47,6 +48,9 @@ const ChatHeader = ({ user }: { user: User | undefined }) => {
                   <div className="bg-green-900 h-4 w-4 rounded-full animate-pulse"></div>
                   <h1 className="text-sm">2 online</h1>
                </div>
+            </div>
+            <div>
+               <ToggleButton />
             </div>
             {user ? (
                <Button

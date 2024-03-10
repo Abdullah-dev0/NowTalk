@@ -5,11 +5,11 @@ import supabaseBrowser from "@/lib/supabase/Client";
 import { toast } from "sonner";
 import { v4 as uuidv4 } from "uuid";
 import { Input } from "../ui/input";
-import { InitMessages } from "@/lib/store/InitMessages";
 
 export default function ChatInput() {
    const user = useUser((state) => state.user);
    const addMessage = useMessage((state) => state.addMessage);
+   const setoptimizeIds = useMessage((state) => state.setOptimizeIds);
    const removeMessage = useMessage((state) => state.removeMessage);
    const supabase = supabaseBrowser();
    const handleSendMessage = async (text: string) => {
@@ -29,6 +29,7 @@ export default function ChatInput() {
             },
          };
          addMessage(newMessage as Imessage | any);
+         setoptimizeIds(newMessage.id);
 
          const { error } = await supabase.from("messages").insert({ text, id });
          if (error) {

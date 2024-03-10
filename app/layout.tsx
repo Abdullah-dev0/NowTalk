@@ -22,13 +22,10 @@ export default function RootLayout({
          <body className={space_Grotesk.className}>
             <ThemeProvider
                attribute="class"
-               defaultTheme="dark"
+               defaultTheme="system"
                enableSystem
                disableTransitionOnChange
             >
-               <main className="absolute top-7 md:block hidden p-2 right-5">
-                  <ToggleButton />
-               </main>
                {children}
                <Toaster position="top-center" />
             </ThemeProvider>

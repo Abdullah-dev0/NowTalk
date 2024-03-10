@@ -1,3 +1,4 @@
+import { Imessage, useMessage } from "@/lib/store/messages";
 import { useUser } from "@/lib/store/user";
 import { Ellipsis } from "lucide-react";
 import Image from "next/image";
@@ -9,7 +10,6 @@ import {
    DropdownMenuSeparator,
    DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { Imessage, useMessage } from "@/lib/store/messages";
 
 const Messages = ({ message }: { message: any }) => {
    const user = useUser((state) => state.user);
@@ -18,7 +18,7 @@ const Messages = ({ message }: { message: any }) => {
          <div className="flex gap-2">
             <div>
                <Image
-                  src={message.users.avatar_url}
+                  src={message.users?.avatar_url}
                   width={30}
                   height={30}
                   className="rounded-full ring-2"
@@ -27,17 +27,20 @@ const Messages = ({ message }: { message: any }) => {
             </div>
             <div className="flex-1">
                <div className="flex justify-between items-center">
-                  <div className="flex gap-2 items-center">
-                     <h1>{message.users.display_name}</h1>
+                  <div className="flex flex-col sm:flex-row   sm:gap-2 sm:items-center">
+                     <h1>{message.users?.display_name}</h1>
                      <h1 className="text-[13px] font-light">
                         {new Date(message.created_at).toDateString()}
+                     </h1>
+                     <h1 className="text-xs text-slate-400">
+                        {message.is_edit && "edited"}
                      </h1>
                   </div>
                   {message.users?.id === user?.id && (
                      <ActionButtons message={message} />
                   )}
                </div>
-               <p className="text-sm dark:text-slate-200 text-slate-700">
+               <p className="text-sm dark:text-slate-100 text-slate-700">
                   {message.text}
                </p>
             </div>
@@ -67,7 +70,14 @@ const ActionButtons = ({ message }: { message: Imessage }) => {
                >
                   Delete
                </DropdownMenuItem>
-               <DropdownMenuItem>Edit</DropdownMenuItem>
+               <DropdownMenuItem
+                  onClick={() => {
+                     document.getElementById("edit-trigger")?.click();
+                     setActionMessage(message);
+                  }}
+               >
+                  Edit
+               </DropdownMenuItem>
             </DropdownMenuContent>
          </DropdownMenu>
       </>
