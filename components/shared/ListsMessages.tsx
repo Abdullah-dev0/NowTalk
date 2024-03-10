@@ -13,6 +13,7 @@ const ListsMessages = () => {
    const removeMessage = useMessage((state) => state.removeMessage);
    const editMessage = useMessage((state) => state.editMessage);
    const { addMessage } = useMessage((state) => state);
+   const [notification, setNotification] = useState<number>(0);
    const scrollRef = useRef<HTMLDivElement>(null);
    const [userScrolled, setUserScrolled] = useState<boolean>(false);
    useEffect(() => {
@@ -39,6 +40,16 @@ const ListsMessages = () => {
                      };
                      addMessage(newMessage as unknown as Imessage);
                   }
+               }
+               const scrollContainer = scrollRef.current;
+               if (
+                  scrollContainer &&
+                  scrollContainer.scrollTop <
+                     scrollContainer.scrollHeight -
+                        scrollContainer.clientHeight -
+                        10
+               ) {
+                  setNotification((current) => current + 1);
                }
             }
          )
@@ -72,52 +83,70 @@ const ListsMessages = () => {
    }, [messages]);
 
    useEffect(() => {
-      if (scrollRef.current) {
+      if (scrollRef.current && !userScrolled) {
          scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
       }
    }, [messages]);
 
    const scrollhandler = () => {
-      if (scrollRef.current) {
-         const isscroll =
-            scrollRef.current.scrollTop <
-            scrollRef.current.scrollHeight -
-               scrollRef.current.clientHeight -
-               10;
-         setUserScrolled(isscroll);
+      const scrollContainer = scrollRef.current;
+      if (scrollContainer) {
+         const isScroll =
+            scrollContainer.scrollTop <
+            scrollContainer.scrollHeight - scrollContainer.clientHeight - 10;
+         setUserScrolled(isScroll);
+         if (
+            scrollContainer.scrollTop ===
+            scrollContainer.scrollHeight - scrollContainer.clientHeight
+         ) {
+            setNotification(0);
+         }
       }
    };
    const scrollDown = () => {
       if (scrollRef.current) {
+         setNotification(0);
          scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
       }
    };
 
    return (
-      <div
-         className="p-5 flex flex-col flex-1 h-full overflow-y-auto"
-         ref={scrollRef}
-         onScroll={scrollhandler}
-      >
-         <div className="flex-1"></div>
-         <div className="space-y-7">
-            {messages.map((item, index) => (
-               <Messages message={item} key={index} />
-            ))}
+      <>
+         <div
+            className="p-5 flex flex-col  flex-1 h-full overflow-y-auto"
+            ref={scrollRef}
+            onScroll={scrollhandler}
+         >
+            <div className="flex-1"></div>
+            <div className="space-y-7">
+               {messages.map((item, index) => (
+                  <Messages message={item} key={index} />
+               ))}
+            </div>
+            <DeleteAction />
+            <EditAction />
          </div>
+
          {userScrolled && (
-            <div className="absolute md:bottom-32 bottom-20 right-1/2 ">
-               <div
-                  className="w-8 bg-blue-600 hover:scale-110 transition-all text-white rounded-full flex justify-center items-center cursor-pointer  h-8 mx-auto"
-                  onClick={scrollDown}
-               >
-                  <ArrowDown />
-               </div>
+            <div className=" absolute bottom-20 w-full">
+               {notification ? (
+                  <div
+                     className="w-36 mx-auto bg-indigo-500 p-2 text-white  rounded-md cursor-pointer"
+                     onClick={scrollDown}
+                  >
+                     <h1>New {notification} messages</h1>
+                  </div>
+               ) : (
+                  <div
+                     className="w-10 h-10 bg-blue-500 rounded-full justify-center items-center flex text-white mx-auto border cursor-pointer hover:scale-110 transition-all"
+                     onClick={scrollDown}
+                  >
+                     <ArrowDown />
+                  </div>
+               )}
             </div>
          )}
-         <DeleteAction />
-         <EditAction />
-      </div>
+      </>
    );
 };
 
