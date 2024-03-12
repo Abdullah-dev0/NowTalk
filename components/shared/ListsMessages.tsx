@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import DeleteAction, { EditAction } from "./ActionButtons";
 import Messages from "./Messages";
+import SeeMore from "./SeeMore";
 
 const ListsMessages = () => {
    const messages = useMessage((state) => state.messages);
@@ -15,7 +16,12 @@ const ListsMessages = () => {
    const { addMessage } = useMessage((state) => state);
    const [notification, setNotification] = useState<number>(0);
    const scrollRef = useRef<HTMLDivElement>(null);
+   const [showSeeMore, setShowSeeMore] = useState<boolean>(false);
    const [userScrolled, setUserScrolled] = useState<boolean>(false);
+
+   setTimeout(() => {
+      setShowSeeMore(true);
+   }, 2000);
    useEffect(() => {
       const supabase = supabaseBrowser();
       const channel = supabase
@@ -117,7 +123,7 @@ const ListsMessages = () => {
             ref={scrollRef}
             onScroll={scrollhandler}
          >
-            <div className="flex-1"></div>
+            <div className="flex-1 pb-5">{showSeeMore && <SeeMore />}</div>
             <div className="space-y-7">
                {messages.map((item, index) => (
                   <Messages message={item} key={index} />

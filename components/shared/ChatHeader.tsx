@@ -6,6 +6,7 @@ import React from "react";
 import { Button } from "../ui/button";
 import Spinner from "./Spinner";
 import { ToggleButton } from "./ToggleButton";
+import OnlinePresence from "./OnlinePresence";
 
 const ChatHeader = ({ user }: { user: User | undefined }) => {
    const [loading, setLoading] = React.useState(false);
@@ -44,10 +45,7 @@ const ChatHeader = ({ user }: { user: User | undefined }) => {
          <div className="border-b p-5 h-full flex items-center justify-between">
             <div>
                <h1 className="text-2xl font-bold">NowTalk</h1>
-               <div className="flex gap-2 mt-1 items-center">
-                  <div className="bg-green-900 h-4 w-4 rounded-full animate-pulse"></div>
-                  <h1 className="text-sm">2 online</h1>
-               </div>
+               <OnlinePresence />
             </div>
             <div>
                <ToggleButton />

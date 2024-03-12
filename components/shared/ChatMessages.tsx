@@ -1,33 +1,22 @@
-import { InitMessages } from "@/lib/store/InitMessages";
+import React, { Suspense } from "react";
+import ListMessages from "./ListsMessages";
 import supabaseServer from "@/lib/supabase/server";
-import { Suspense } from "react";
-import ListsMessages from "./ListsMessages";
-import Spinner from "./Spinner";
+import {InitMessages }from "@/lib/store/InitMessages";
+import { LIMIT_MESSAGE } from "@/constant/index";
 
-const ChatMessages = async () => {
+export default async function ChatMessages() {
    const supabase = await supabaseServer();
 
-   const { data, error } = await supabase.from("messages").select(`
-    *,
-    users (
-      *
-    )
-  `);
-   if (error) console.log("error", error);
-   return (
-      <>
-         <Suspense
-            fallback={
-               <div className="flex justify-center items-center h-50vh">
-                  <Spinner />
-               </div>
-            }
-         >
-            <ListsMessages />
-            <InitMessages messages={data || []} />
-         </Suspense>
-      </>
-   );
-};
+   const { data } = await supabase
+      .from("messages")
+      .select("*,users(*)")
+      .range(0, LIMIT_MESSAGE)
+      .order("created_at", { ascending: false });
 
-export default ChatMessages;
+   return (
+      <Suspense fallback={"loading.."}>
+         <ListMessages />
+         <InitMessages messages={data?.reverse() || []} />
+      </Suspense>
+   );
+}
