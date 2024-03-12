@@ -43,10 +43,7 @@ const ChatHeader = ({ user }: { user: User | undefined }) => {
    return (
       <div className="h-20">
          <div className="border-b p-5 h-full flex items-center justify-between">
-            <div>
-               <h1 className="text-2xl font-bold">NowTalk</h1>
-               <OnlinePresence />
-            </div>
+            <div>{user ? <OnlinePresence /> : <></>}</div>
             <div>
                <ToggleButton />
             </div>

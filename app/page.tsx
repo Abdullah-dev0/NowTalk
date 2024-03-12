@@ -13,7 +13,6 @@ export default async function Home() {
          <div className="max-w-3xl h-screen mx-auto md:py-10 ">
             <div className="h-full border relative rounded-md flex flex-col">
                <ChatHeader user={data.session?.user} />
-
                {data.session?.user ? (
                   <>
                      <ChatMessages />
