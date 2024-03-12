@@ -12,6 +12,7 @@ export const InitMessages = ({ messages }: { messages: Imessage[] }) => {
          useMessage.setState({ messages, hasMore });
       }
       messagesRef.current = true;
+      // eslint-disable-next-line
    }, []);
    return <></>;
 };
