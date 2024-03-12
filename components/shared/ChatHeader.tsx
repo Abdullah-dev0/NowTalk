@@ -47,32 +47,35 @@ const ChatHeader = ({ user }: { user: User | undefined }) => {
                <h1 className="text-[1.3rem] font-medium">NowChat</h1>
                {user && <OnlinePresence />}
             </div>
-            <div>
+
+            <div className="flex gap-4">
                <ToggleButton />
+               {user ? (
+                  <Button
+                     disabled={loading}
+                     className={`${
+                        loading ? "cursor-not-allowed opacity-50" : ""
+                     }`}
+                     onClick={handleLogout}
+                  >
+                     {loading && <Spinner />}
+                     Logout
+                  </Button>
+               ) : (
+                  <>
+                     <Button
+                        disabled={loading}
+                        className={`${
+                           loading ? "cursor-not-allowed opacity-50" : ""
+                        }`}
+                        onClick={handleLoginWithGithub}
+                     >
+                        {loading && <Spinner />}
+                        Sign in
+                     </Button>
+                  </>
+               )}
             </div>
-            {user ? (
-               <Button
-                  disabled={loading}
-                  className={`${
-                     loading ? "cursor-not-allowed opacity-50" : ""
-                  }`}
-                  onClick={handleLogout}
-               >
-                  {loading && <Spinner />}
-                  Logout
-               </Button>
-            ) : (
-               <Button
-                  disabled={loading}
-                  className={`${
-                     loading ? "cursor-not-allowed opacity-50" : ""
-                  }`}
-                  onClick={handleLoginWithGithub}
-               >
-                  {loading && <Spinner />}
-                  Sign in
-               </Button>
-            )}
          </div>
       </div>
    );
