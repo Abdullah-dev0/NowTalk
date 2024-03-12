@@ -29,10 +29,12 @@ function OnlinePresence() {
          });
       // eslint-disable-next-line
    }, [user]);
-   if (!user) return <></>;
+
+
+   if (!user) return <div className="h-3 w-3"></div>;
 
    return (
-      <div className="flex gap-2 mt-1 items-center">
+      <div className="flex gap-2 items-center">
          <div className="bg-green-900 h-4 w-4 rounded-full animate-pulse"></div>
          <h1 className="text-sm">{online} online</h1>
       </div>
