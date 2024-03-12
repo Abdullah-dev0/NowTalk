@@ -7,13 +7,12 @@ function OnlinePresence() {
    const supabase = supabaseBrowser();
    const user = useUser((state) => state.user);
    const [online, setOnlineUsers] = useState<number>(0);
+
    useEffect(() => {
-      console.log("user", user);
       const channel = supabase.channel("room1");
       channel
          .on("presence", { event: "sync" }, () => {
             const userIds = [];
-
             for (const id in channel.presenceState()) {
                // @ts-ignore
                userIds.push(channel.presenceState()[id][0].user_id);
@@ -31,6 +30,7 @@ function OnlinePresence() {
       // eslint-disable-next-line
    }, [user]);
    if (!user) return <></>;
+
    return (
       <div className="flex gap-2 mt-1 items-center">
          <div className="bg-green-900 h-4 w-4 rounded-full animate-pulse"></div>
