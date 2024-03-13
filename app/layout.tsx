@@ -1,9 +1,8 @@
+import { ThemeProvider } from "@/components/shared/theme-provider";
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
-import { ThemeProvider } from "@/components/shared/theme-provider";
-import "./globals.css";
-import { ToggleButton } from "@/components/shared/ToggleButton";
 import { Toaster } from "sonner";
+import "./globals.css";
 
 const space_Grotesk = Space_Grotesk({ subsets: ["latin"] });
 
@@ -26,7 +25,7 @@ export default function RootLayout({
                enableSystem
                disableTransitionOnChange
             >
-               {children}
+               <main className="relative">{children}</main>
                <Toaster position="top-center" />
             </ThemeProvider>
          </body>

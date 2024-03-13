@@ -30,7 +30,6 @@ function OnlinePresence() {
       // eslint-disable-next-line
    }, [user]);
 
-
    if (!user) return <div className="h-3 w-3"></div>;
 
    return (
