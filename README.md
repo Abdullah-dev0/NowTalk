@@ -1,6 +1,3 @@
-🚀 Wait Is over...
-
-🚀 Exciting News! Thrilled to unveil my latest creation: NowChat - A real time chat App 🌐🤖
 
 
 🔍 What's It About?- I've built a robust real-time chat application utilizing Supabase's comprehensive functionalities. This platform empowers real-time communication, enabling seamless interaction and fostering dynamic online communities.
