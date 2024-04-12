@@ -8,7 +8,7 @@ const SocialLinks = () => {
          <p className="w-36 bg-green-600 h-1"></p>
          <div className="flex gap-6 mt-4">
             <span>
-               <Link href={"https://github.com/Abdullah-142"} target="_blank">
+               <Link href={"https://github.com/Abdullah-dev0"} target="_blank">
                   <Github size={27} />
                </Link>
             </span>
