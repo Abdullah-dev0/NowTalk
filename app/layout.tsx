@@ -13,7 +13,7 @@ export const metadata: Metadata = {
    openGraph: {
       title: "NowTalk - Chat Application",
       description: "NowTalk is a chat application for the modern web.",
-      url: "https://nowtalk.example.com",
+      url: "https://now-talk-omega.vercel.app",
       siteName: "NowTalk",
       images: [
          {
