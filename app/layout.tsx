@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 		siteName: "NowTalk",
 		images: [
 			{
-				url: "https://now-talk-omega.vercel.app/images/nowtalk.png",
+				url: "images/nowtalk.png",
 				width: 1200,
 				height: 630,
 				alt: "NowTalk Preview Image",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 		description: "NowTalk is a chat application for the modern web.",
 		creator: "@Abdu_lah14", // Replace with your Twitter handle
 		site: "@Abdu_lah14", // Replace with your Twitter handle
-		images: ["https://now-talk-omega.vercel.app/images/nowtalk.png"],
+		images: "https://now-talk-omega.vercel.app/images/nowtalk.png",
 	},
 };
 
