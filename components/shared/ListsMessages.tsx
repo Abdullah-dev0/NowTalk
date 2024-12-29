@@ -22,6 +22,8 @@ const ListsMessages = () => {
    setTimeout(() => {
       setShowSeeMore(true);
    }, 2000);
+
+   
    useEffect(() => {
       const supabase = supabaseBrowser();
       const channel = supabase

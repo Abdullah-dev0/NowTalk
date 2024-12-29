@@ -28,6 +28,8 @@ import { Input } from "../ui/input";
 const DeleteAction = () => {
    const message = useMessage((state) => state.actionMessage);
    const optimizeMessage = useMessage((state) => state.optimizeMessage);
+
+
    const handleDeleteMessage = async () => {
       const supabase = supabaseBrowser();
       optimizeMessage(message?.id!);
@@ -42,6 +44,8 @@ const DeleteAction = () => {
          toast.success("Successfully delete a message");
       }
    };
+
+   
    return (
       <AlertDialog>
          <AlertDialogTrigger asChild>

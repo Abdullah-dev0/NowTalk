@@ -9,7 +9,27 @@ const space_Grotesk = Space_Grotesk({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
    title: "NowTalk",
-   description: "A  chat app for the modern web",
+   description: "A chat app for the modern web",
+   openGraph: {
+      title: "NowTalk - Chat Application",
+      description: "NowTalk is a chat application for the modern web.",
+      url: "https://nowtalk.example.com",
+      siteName: "NowTalk",
+      images: [
+         {
+            url: "/images/nowtalk.png",
+            width: 800,
+            height: 600,
+            alt: "NowTalk Preview Image",
+         },
+      ],
+   },
+   twitter: {
+      card: "summary_large_image",
+      title: "NowTalk - Chat Application",
+      description: "NowTalk is a chat application for the modern web.",
+      images: ["/images/nowtalk.png"],
+   },
 };
 
 export default function RootLayout({
